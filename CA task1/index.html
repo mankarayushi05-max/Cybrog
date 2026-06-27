@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CYBERGENESIS — Humanity Upgraded</title>
+  <meta name="description" content="Merging biological intelligence with cybernetic evolution. Experience the future of humanity at CYBERGENESIS — the advanced AI operating system of 2080." />
+  <meta name="keywords" content="cybergenesis, cybernetic, AI, future, human evolution, neural link, bionic" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <!-- GSAP & Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor" class="cursor"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+  <div id="cursor-dot" class="cursor-dot"></div>
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader">
+    <div class="loader-content">
+      <div class="loader-logo">CYBERGENESIS</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <div class="loader-status" id="loaderStatus">INITIALIZING NEURAL CORE...</div>
+      <div class="loader-percent" id="loaderPercent">0%</div>
+      <div class="sound-wave">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mouse Spotlight -->
+  <div id="spotlight" class="spotlight"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-logo">
+      <span class="logo-bracket">[</span>
+      <span class="logo-text">CYBER<span class="logo-accent">GENESIS</span></span>
+      <span class="logo-bracket">]</span>
+    </div>
+    <div class="nav-links">
+      <a href="#evolution" class="nav-link" data-text="Evolution">Evolution</a>
+      <a href="#enhancements" class="nav-link" data-text="Enhancements">Enhancements</a>
+      <a href="#assistant" class="nav-link" data-text="AI Core">AI Core</a>
+      <a href="#dna" class="nav-link" data-text="DNA Scan">DNA Scan</a>
+      <a href="#stats" class="nav-link" data-text="Stats">Stats</a>
+      <a href="#modules" class="nav-link" data-text="Modules">Modules</a>
+    </div>
+    <div class="nav-cta">
+      <button class="btn-magnetic nav-btn" id="navCta">
+        <span>INITIALIZE</span>
+        <div class="btn-glow"></div>
+      </button>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Neural Sync Progress -->
+  <div class="neural-progress" id="neuralProgress">
+    <div class="neural-label">NEURAL SYNC</div>
+    <div class="neural-bar-track">
+      <div class="neural-bar-fill" id="neuralFill"></div>
+    </div>
+    <div class="neural-percent" id="neuralPercent">0%</div>
+  </div>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero" id="hero">
+    <!-- Three.js Canvas -->
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+
+    <!-- Particle Network -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- Grid Floor -->
+    <div class="grid-floor"></div>
+
+    <!-- Digital Rain Canvas -->
+    <canvas id="rainCanvas" class="rain-canvas"></canvas>
+
+    <!-- Light Beams -->
+    <div class="light-beams">
+      <div class="beam beam-1"></div>
+      <div class="beam beam-2"></div>
+      <div class="beam beam-3"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content" id="heroContent">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>SYSTEM ONLINE — 2080.06.11</span>
+      </div>
+
+      <h1 class="hero-title" id="heroTitle">
+        <span class="title-line" data-text="HUMANITY">HUMANITY</span>
+        <span class="title-line title-accent" data-text="UPGRADED.">UPGRADED.</span>
+      </h1>
+
+      <p class="hero-sub" id="heroSub">Merging biological intelligence with<br/>cybernetic evolution.</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-num">2.4B</span>
+          <span class="stat-label">Augmented Humans</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-num">99.7%</span>
+          <span class="stat-label">Neural Accuracy</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-num">0.3ms</span>
+          <span class="stat-label">Response Latency</span>
+        </div>
+      </div>
+
+      <div class="hero-buttons">
+        <button class="btn-magnetic btn-primary" id="btnInitialize">
+          <span class="btn-inner">
+            <i class="fa-solid fa-bolt"></i>
+            INITIALIZE GENESIS
+          </span>
+          <div class="btn-glow"></div>
+          <div class="btn-particles"></div>
+        </button>
+        <button class="btn-magnetic btn-secondary" id="btnLearn">
+          <span class="btn-inner">
+            <i class="fa-solid fa-circle-play"></i>
+            WITNESS EVOLUTION
+          </span>
+          <div class="btn-glow"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Data Streams -->
+    <div class="data-streams" id="dataStreams">
+      <div class="stream stream-1">010110100110100101</div>
+      <div class="stream stream-2">110011001101001011</div>
+      <div class="stream stream-3">001010110010110101</div>
+      <div class="stream stream-4">101101001011010011</div>
+    </div>
+
+    <!-- HUD Elements -->
+    <div class="hud-elements">
+      <div class="hud hud-tl">
+        <div class="hud-label">SYS STATUS</div>
+        <div class="hud-value text-cyan">OPTIMAL</div>
+        <div class="hud-line"></div>
+      </div>
+      <div class="hud hud-tr">
+        <div class="hud-label">CORE TEMP</div>
+        <div class="hud-value text-purple">37.2°C</div>
+        <div class="hud-line"></div>
+      </div>
+      <div class="hud hud-bl">
+        <div class="hud-label">UPLINK SPEED</div>
+        <div class="hud-value text-cyan">∞ Tbps</div>
+        <div class="hud-line"></div>
+      </div>
+      <div class="hud hud-br">
+        <div class="hud-label">THREAT LEVEL</div>
+        <div class="hud-value text-green">NONE</div>
+        <div class="hud-line"></div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-text">SCROLL TO EVOLVE</div>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===================== EVOLUTION TIMELINE ===================== -->
+  <section class="section evolution-section" id="evolution">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 01</div>
+      <h2 class="section-title">Human Evolution <span class="text-cyan">Timeline</span></h2>
+      <p class="section-sub">From biological beginnings to cybernetic transcendence</p>
+    </div>
+
+    <div class="timeline-container" id="timelineContainer">
+      <div class="timeline-track"></div>
+      <div class="timeline-progress-line" id="timelineProgress"></div>
+
+      <div class="timeline-events" id="timelineEvents">
+        <!-- Events injected by JS -->
+      </div>
+    </div>
+
+    <div class="timeline-nav">
+      <button class="tl-btn" id="tlPrev"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="tl-dots" id="tlDots"></div>
+      <button class="tl-btn" id="tlNext"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- ===================== CYBERNETIC ENHANCEMENTS ===================== -->
+  <section class="section enhancements-section" id="enhancements">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 02</div>
+      <h2 class="section-title">Cybernetic <span class="text-purple">Enhancements</span></h2>
+      <p class="section-sub">Six pathways to transcend biological limitations</p>
+    </div>
+
+    <div class="enhancements-orbit" id="enhancementsOrbit">
+      <!-- Central core -->
+      <div class="orbit-core" id="orbitCore">
+        <div class="core-ring core-ring-1"></div>
+        <div class="core-ring core-ring-2"></div>
+        <div class="core-ring core-ring-3"></div>
+        <div class="core-center">
+          <div class="core-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="core-label">AI CORE</div>
+        </div>
+      </div>
+
+      <!-- Enhancement cards injected by JS -->
+      <div class="enhance-cards" id="enhanceCards"></div>
+
+      <!-- Connection lines canvas -->
+      <canvas id="connectionCanvas" class="connection-canvas"></canvas>
+    </div>
+
+    <!-- Detail Panel -->
+    <div class="enhance-detail" id="enhanceDetail">
+      <div class="detail-header">
+        <div class="detail-icon" id="detailIcon"></div>
+        <div class="detail-info">
+          <div class="detail-name" id="detailName">Select an Enhancement</div>
+          <div class="detail-status" id="detailStatus">AVAILABLE</div>
+        </div>
+      </div>
+      <p class="detail-desc" id="detailDesc">Hover over any enhancement node to explore its capabilities and integration protocols.</p>
+      <div class="detail-stats" id="detailStats"></div>
+    </div>
+  </section>
+
+  <!-- ===================== AI ASSISTANT ===================== -->
+  <section class="section assistant-section" id="assistant">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 03</div>
+      <h2 class="section-title">ARIA — AI <span class="text-cyan">Assistant</span></h2>
+      <p class="section-sub">Your sentient cybernetic companion, always online</p>
+    </div>
+
+    <div class="assistant-showcase">
+      <div class="assistant-visual">
+        <div class="aria-orb">
+          <div class="aria-ring aria-ring-1"></div>
+          <div class="aria-ring aria-ring-2"></div>
+          <div class="aria-ring aria-ring-3"></div>
+          <div class="aria-core">
+            <div class="voice-wave" id="voiceWave">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="aria-status">
+          <span class="status-dot"></span>
+          ARIA v9.2 — ONLINE
+        </div>
+      </div>
+
+      <div class="chat-interface" id="chatInterface">
+        <div class="chat-header">
+          <div class="chat-title">
+            <i class="fa-solid fa-microchip"></i>
+            NEURAL CHAT INTERFACE
+          </div>
+          <div class="chat-controls">
+            <span class="cc cc-red"></span>
+            <span class="cc cc-yellow"></span>
+            <span class="cc cc-green"></span>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages injected by JS -->
+        </div>
+
+        <div class="chat-input-area">
+          <div class="chat-input-wrap">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Transmit neural command..." />
+            <button class="chat-send" id="chatSend">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+          <div class="chat-hints">
+            <span class="hint-tag" data-msg="What is Neural Link?">Neural Link</span>
+            <span class="hint-tag" data-msg="Show my enhancement status">Status</span>
+            <span class="hint-tag" data-msg="Activate BioVision mode">BioVision</span>
+            <span class="hint-tag" data-msg="Run diagnostic scan">Diagnostic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DNA SCANNER ===================== -->
+  <section class="section dna-section" id="dna">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 04</div>
+      <h2 class="section-title">DNA <span class="text-crimson">Scanner</span></h2>
+      <p class="section-sub">Real-time biometric analysis and enhancement mapping</p>
+    </div>
+
+    <div class="dna-showcase">
+      <div class="dna-visual">
+        <canvas id="dnaCanvas" class="dna-canvas"></canvas>
+        <div class="dna-overlay">
+          <div class="dna-label">GENOME SEQUENCING</div>
+          <div class="dna-progress-ring">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(0,255,255,0.1)" stroke-width="6"/>
+              <circle id="dnaRingProgress" cx="60" cy="60" r="50" fill="none" stroke="url(#dnaGradient)" stroke-width="6" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314"/>
+              <defs>
+                <linearGradient id="dnaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00ffff"/>
+                  <stop offset="100%" stop-color="#8b00ff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ring-percent" id="ringPercent">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dna-stats">
+        <div class="dna-stat-title">ENHANCEMENT LEVELS</div>
+        <div class="dna-bars" id="dnaBars">
+          <!-- Injected by JS -->
+        </div>
+        <div class="dna-readout">
+          <div class="readout-line" id="readoutLine">SCANNING... GENOME IDENTIFIED</div>
+          <div class="readout-sub">COMPATIBILITY: <span class="text-cyan" id="compatScore">--</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATISTICS DASHBOARD ===================== -->
+  <section class="section stats-section" id="stats">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 05</div>
+      <h2 class="section-title">Global <span class="text-cyan">Statistics</span></h2>
+      <p class="section-sub">Real-time data from the cybernetic network</p>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+      <!-- Injected by JS -->
+    </div>
+
+    <div class="stats-graph-area">
+      <canvas id="graphCanvas" class="graph-canvas"></canvas>
+      <div class="graph-labels" id="graphLabels"></div>
+    </div>
+  </section>
+
+  <!-- ===================== TECHNOLOGY MODULES ===================== -->
+  <section class="section modules-section" id="modules">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 06</div>
+      <h2 class="section-title">Technology <span class="text-purple">Modules</span></h2>
+      <p class="section-sub">Hexagonal architecture for maximum cognitive throughput</p>
+    </div>
+
+    <div class="hex-grid" id="hexGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 07</div>
+      <h2 class="section-title">Neural <span class="text-cyan">Testimonials</span></h2>
+      <p class="section-sub">Voices from the augmented collective</p>
+    </div>
+
+    <div class="testimonials-grid" id="testimonialsGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- ===================== CTA SECTION ===================== -->
+  <section class="section cta-section" id="cta">
+    <canvas id="energyCanvas" class="energy-canvas"></canvas>
+    <div class="cta-content">
+      <div class="cta-tag">THE FINAL UPGRADE</div>
+      <h2 class="cta-title">
+        Join The Next<br/>
+        <span class="cta-title-glow">Evolution.</span>
+      </h2>
+      <p class="cta-sub">Your biological limits end here. The future of human consciousness awaits.</p>
+      <button class="btn-magnetic btn-cta" id="btnCta">
+        <span class="btn-inner">
+          <i class="fa-solid fa-dna"></i>
+          BEGIN YOUR GENESIS
+        </span>
+        <div class="btn-glow"></div>
+        <div class="btn-pulse"></div>
+      </button>
+      <div class="cta-disclaimer">By joining, you agree to upgrade your biological limitations.</div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">CYBERGENESIS</div>
+        <p class="footer-desc">The world's first cybernetic enhancement corporation, merging humanity with tomorrow's technology.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <div class="footer-col-title">SYSTEM</div>
+          <a href="#" class="footer-link">Neural Core</a>
+          <a href="#" class="footer-link">BioSync API</a>
+          <a href="#" class="footer-link">Quantum Mesh</a>
+          <a href="#" class="footer-link">Data Vault</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">COMPANY</div>
+          <a href="#" class="footer-link">About CGEN</a>
+          <a href="#" class="footer-link">Research Labs</a>
+          <a href="#" class="footer-link">Ethics Board</a>
+          <a href="#" class="footer-link">Careers</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">LEGAL</div>
+          <a href="#" class="footer-link">Terms of Existence</a>
+          <a href="#" class="footer-link">Data Policy</a>
+          <a href="#" class="footer-link">Neural Rights</a>
+          <a href="#" class="footer-link">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2080 CYBERGENESIS CORP. ALL NEURAL RIGHTS RESERVED.</div>
+      <div class="footer-status">
+        <span class="status-dot"></span>
+        ALL SYSTEMS NOMINAL
+      </div>
+    </div>
+  </footer>
+
+  <!-- Easter Egg Modal -->
+  <div class="easter-modal" id="easterModal">
+    <div class="easter-content">
+      <div class="easter-icon">🧬</div>
+      <h3>GENESIS CODE UNLOCKED</h3>
+      <p>You discovered the hidden genome sequence.<br/>Your cybernetic journey begins now.</p>
+      <div class="easter-code">GENESIS-ALPHA-7-OMEGA</div>
+      <button class="easter-close" id="easterClose">ACKNOWLEDGE</button>
+    </div>
+  </div>
+
+  <!-- Particle Explosion Container -->
+  <div id="explosionContainer" class="explosion-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
